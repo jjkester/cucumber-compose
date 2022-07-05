@@ -15,8 +15,8 @@ android {
 
         testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
         testInstrumentationRunnerArguments = [
-                waitForActivitiesToComplete: 'false'
-//                cucumberUseAndroidJUnitRunner: 'true'
+                waitForActivitiesToComplete: 'false' // Mitigation for JUnit rule issue
+//                cucumberUseAndroidJUnitRunner: 'true' // Uncomment to run normal Android tests
         ]
 
         vectorDrawables {
