@@ -15,6 +15,7 @@ android {
 
         testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
         testInstrumentationRunnerArguments = [
+                waitForActivitiesToComplete: 'false'
 //                cucumberUseAndroidJUnitRunner: 'true'
         ]
 

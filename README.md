@@ -53,6 +53,8 @@ passes or fails), the activity can and should be destroyed.
 
 ## Analysis
 
+### First analysis
+
 The implementation of `io.cucumber.junit.RulesExecutor` looks correct in that it uses latches to
 ensure the JUnit base `Statement` runs for as long as the tests run. However, during debugging it
 was observed that the activity finishes at an earlier point.
@@ -79,3 +81,13 @@ where the activity stops is not coincidental.
 
 From the above observations, it seems the issue may be triggered by reporting the test case to have
 started to JUnit. Further investigation on the root cause is necessary.
+
+### Second analysis
+
+See https://github.com/cucumber/cucumber-android/issues/102
+
+The activity is stopped by the `TestCaseStarted` event because of the
+Android `ActivityFinisherRunListener`. As it turns out, under normal JUnit conditions the event
+fires (and all activities are stopped) before the rule is evaluated. The issue can be mitigated by
+disabling the activity finisher by setting `waitForActivitiesToComplete=true`. A more permanent
+solution could be to change the order in with Cucumber performs these steps.
